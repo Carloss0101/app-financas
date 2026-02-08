@@ -53,3 +53,16 @@ export async function salvarLancamento(dados, userId) {
     }
 
 }
+
+export async function buscarLancamentosPorUsuario(userId) {
+    try {
+        const lancamentos = await Lancamento.find({ userId: userId });
+        return {
+            sucesso: true,
+            lancamentos
+        };
+    } catch (error) {
+        console.error("Erro ao buscar Lançamentos: ", error);
+        return { sucesso: false, mensagem: "Erro ao buscar lançamentos." };
+    }
+}
