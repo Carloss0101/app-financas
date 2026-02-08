@@ -14,8 +14,6 @@ export async function login(req, res) {
         return res.status(401).json({ mensagem: resultadoCredenciais.mensagem });
     }
     
-    console.log("Usuário autenticado com sucesso:", resultadoCredenciais);
-    console.log("Usuário autenticado com sucesso:", resultadoCredenciais.usuario._id);
     const token = gerarToken({ id: resultadoCredenciais.usuario._id });
     res.status(200).json({ resultadoCredenciais, accessToken: token });
 }

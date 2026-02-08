@@ -30,8 +30,6 @@ export function validarDadosLancamento(dados) {
 
 
 export async function salvarLancamento(dados, userId) {
-    console.log("Salvando lançamento para usuário ID:", userId);
-    console.log("Dados do lançamento:", dados);
     try {
         const lancamento = await Lancamento.create({
             userId: userId,
