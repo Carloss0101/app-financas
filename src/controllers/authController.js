@@ -5,17 +5,17 @@ export async function login(req, res) {
     const resultadoValidacao = validarDadosLogin(req.body);
 
     if (!resultadoValidacao.valido) {
-        return res.status(400).json({ mensagem: resultadoValidacao.mensagem });
+        return res.status(400).json({ status: false, mensagem: resultadoValidacao.mensagem });
     }
 
     const resultadoCredenciais = await verificarCredenciais(req.body);
 
     if (!resultadoCredenciais.valido) {
-        return res.status(401).json({ mensagem: resultadoCredenciais.mensagem });
+        return res.status(401).json({ status: false, mensagem: resultadoCredenciais.mensagem });
     }
     
     const token = gerarToken({ id: resultadoCredenciais.usuario._id });
-    res.status(200).json({ resultadoCredenciais, accessToken: token });
+    res.status(200).json({ status: true, usuario: resultadoCredenciais.usuario, accessToken: token });
 }
 
 export async function cadastrar(req, res) {   

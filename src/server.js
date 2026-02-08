@@ -1,13 +1,18 @@
 import "dotenv/config"; 
-import authRoutes from "./routes/authRoutes.js";
-import lancamento from "./routes/lancamentoRoutes.js";
 import express from "express";
 import { connectMongo } from "./database/mongo.js";
+
+import authRoutes from "./routes/authRoutes.js";
+import lancamento from "./routes/lancamentoRoutes.js";
+import pagesRoutes from "./routes/pagesRoutes.js";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
+
+// Rotas de páginas
+app.use("/", pagesRoutes);
 
 app.use("/auth", authRoutes);
 app.use("/lancamento", lancamento);

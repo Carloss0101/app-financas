@@ -1,0 +1,22 @@
+:root {
+  --cor-background-escura: #101728;
+  --cor-background-clara: #2a3b66;
+  --cor-background-modal: #260e69;
+  --cor-botao-azul: #007bff;
+  --fonte-padrao: 'Arial', sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    font-family: var(--fonte-padrao);
+}
+
+body {
+    height: 100vh;
+    background-color: var(--cor-background-escura);
+    overflow: hidden;
+    overflow-y: hidden;
+    font-family: sans-serif;
+}

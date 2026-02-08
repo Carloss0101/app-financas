@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="public/css/style.css" />
+    <link rel="stylesheet" href="public/css/auth.css" />
+    <script src="public/js/cadastro.js" type="module"></script>
+    <title>Cadastro</title>
+  </head>
+  <body>
+    <form id="form">
+      <h1>Cadastro</h1>
+
+      <div id="form-input">
+        <div class="item-input">
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            name="nome"
+            id="nome"
+            placeholder="Seu nome"
+            required
+          />
+        </div>
+        <div class="item-input">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="seuemail@gmail.com"
+            required
+          />
+        </div>
+        <div class="item-input">
+          <label for="senha">Senha:</label>
+          <input type="text" name="senha" id="senha" required min="4" max="20"/>
+        </div>
+
+      <button id="cadastrar">Cadastrar</button>
+    </form>
+  </body>
+</html>

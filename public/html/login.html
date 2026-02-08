@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/auth.css" />
+    <script src="public/js/login.js" type="module"></script>
+    <title>Login</title>
+  </head>
+  <body>
+    <form id="form">
+      <h1>Login</h1>
+
+        </div>
+        <div class="item-input">
+          <label for="email">Username:</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            required
+          />
+        </div>
+        <div class="item-input">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required min="6" max="20"/>
+        </div>
+      </div>
+
+      <button id="Entrar">Entrar</button>
+
+      <div id="button-cadastro"><a href="http://localhost:8080/cadastro">cadastrar</a></div>
+    </form>
+  </body>
+</html>
