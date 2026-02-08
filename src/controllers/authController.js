@@ -15,7 +15,14 @@ export async function login(req, res) {
     }
     
     const token = gerarToken({ id: resultadoCredenciais.usuario._id });
-    res.status(200).json({ status: true, usuario: resultadoCredenciais.usuario, accessToken: token });
+
+    const usuarioSeguro = {
+        userid: resultadoCredenciais.usuario._id,
+        username: resultadoCredenciais.usuario.username,
+        email: resultadoCredenciais.usuario.email
+    };
+
+    res.status(200).json({ status: true, usuario: usuarioSeguro, accessToken: token });
 }
 
 export async function cadastrar(req, res) {   
@@ -32,5 +39,11 @@ export async function cadastrar(req, res) {
     }
 
     const token = gerarToken({ id: resultadoSalvamento.usuario._id });
-    res.status(201).json({ resultadoSalvamento, accessToken: token });
+
+    const usuarioSeguro = {
+        userid: resultadoSalvamento.usuario._id,
+        username: resultadoSalvamento.usuario.username,
+        email: resultadoSalvamento.usuario.email
+    };
+    res.status(201).json({ usuario: usuarioSeguro, accessToken: token });
 }
