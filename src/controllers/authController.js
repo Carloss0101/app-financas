@@ -13,9 +13,11 @@ export async function login(req, res) {
     if (!resultadoCredenciais.valido) {
         return res.status(401).json({ mensagem: resultadoCredenciais.mensagem });
     }
-
-    const token = gerarToken({ username: req.body.username });
-    res.status(200).json({ status: "sucesso", accessToken: token });
+    
+    console.log("Usuário autenticado com sucesso:", resultadoCredenciais);
+    console.log("Usuário autenticado com sucesso:", resultadoCredenciais.usuario._id);
+    const token = gerarToken({ id: resultadoCredenciais.usuario._id });
+    res.status(200).json({ resultadoCredenciais, accessToken: token });
 }
 
 export async function cadastrar(req, res) {   
@@ -31,6 +33,6 @@ export async function cadastrar(req, res) {
         return res.status(500).json({ mensagem: resultadoSalvamento.mensagem });
     }
 
-    const token = gerarToken({ username: req.body.username });
-    res.status(201).json({ status: "sucesso", accessToken: token });
+    const token = gerarToken({ id: resultadoSalvamento.usuario._id });
+    res.status(201).json({ resultadoSalvamento, accessToken: token });
 }

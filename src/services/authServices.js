@@ -60,13 +60,13 @@ export async function salvarUsuario(dados) {
     try {
         const senhaCriptografada = await bcrypt.hash(dados.password, 10);
 
-        await User.create({
+        const usuario = await User.create({
             username: dados.username,
             email: dados.email,
             password: senhaCriptografada
         });
 
-        return { sucesso: true, mensagem: "Usuário cadastrado com sucesso." };
+        return { sucesso: true, mensagem: "Usuário cadastrado com sucesso.", usuario };
     } catch (error) {
         console.error("Erro ao cadastrar usuário:", error);
         return { sucesso: false, mensagem: "Erro ao cadastrar usuário." };

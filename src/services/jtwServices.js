@@ -10,10 +10,5 @@ export function gerarToken(payload) {
 
 
 export function validarToken(token) {
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    return { valido: true, dados: decoded };
-  } catch (error) {
-    return { valido: false, erro: 'Token inválido ou expirado' };
-  }
+    return jwt.verify(token, process.env.JWT_SECRET);
 }
