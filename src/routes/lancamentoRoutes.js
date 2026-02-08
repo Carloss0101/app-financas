@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { autenticacao } from "../middlewares/authMiddleware.js";
-import {criarLancamento, getLancamentos } from "../controllers/lancamentoController.js";
-import { get } from "mongoose";
+import {criarLancamento, getLancamentos, deleteLancamento } from "../controllers/lancamentoController.js";
 
 const router = Router();
 
@@ -9,6 +8,6 @@ const router = Router();
 router.post('/', autenticacao, criarLancamento);
 router.get('/', autenticacao, getLancamentos );
 //router.put('/:id');
-//router.delete('/:id');
+router.delete('/:id', autenticacao, deleteLancamento);
 
 export default router;

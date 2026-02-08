@@ -66,3 +66,24 @@ export async function buscarLancamentosPorUsuario(userId) {
         return { sucesso: false, mensagem: "Erro ao buscar lançamentos." };
     }
 }
+
+export async function deletarLancamentosPorId(userId, lancamentoId) {
+    try {
+        const resultado = await Lancamento.deleteOne({ _id: lancamentoId, userId: userId });
+
+        if (resultado.deletedCount === 0) {
+            return {
+                sucesso: false,
+                mensagem: "Lançamento não encontrado ou não pertence a este usuário."
+            };
+        }
+
+        return {
+            sucesso: true,
+            mensagem: "Lançamento deletado com sucesso."
+        };
+    } catch (error) {
+        console.error("Erro ao deletar lançamento: ", error);
+        return { sucesso: false, mensagem: "Erro ao deletar lançamento." };
+    }
+}
