@@ -105,3 +105,56 @@ export async function deletarLancamentosPorId(userId, lancamentoId) {
         return { sucesso: false, mensagem: "Erro ao deletar lançamento." };
     }
 }
+
+
+export async function salvarEditLancamento(dados, userId) {
+    try {
+        const validacao = validarDadosLancamento(dados);
+
+        if (!validacao.valido) {
+
+            return {
+                sucesso: false,
+                mensagem: validacao.mensagem
+            };
+
+        }
+
+        const lancamento =
+        await Lancamento.findOne({
+            _id: dados.id,
+            userId: userId
+        });
+
+        if (!lancamento) {
+            return {
+                sucesso: false,
+                mensagem: "Lançamento não encontrado ou não pertence ao usuário."
+            };
+        }
+
+        lancamento.tipo = dados.tipo;
+        lancamento.descricao = dados.descricao;
+        lancamento.valor = dados.valor;
+        lancamento.categoria = dados.categoria;
+        lancamento.data = dados.data ? new Date(dados.data) : lancamento.data;
+
+        lancamento.recorrente = dados.recorrente ?? lancamento.recorrente;
+
+        await lancamento.save();
+
+        return {
+            sucesso: true,
+            mensagem: "Lançamento atualizado com sucesso.",
+            lancamento
+        };
+    }
+    catch (error) {
+        console.error("Erro ao editar lançamento: ", error);
+
+        return {
+            sucesso: false,
+            mensagem: "Erro ao editar lançamento."
+        };
+    }
+}

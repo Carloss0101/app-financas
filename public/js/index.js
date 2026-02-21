@@ -72,10 +72,14 @@ export function atualizarTabelaLancamentos(lancamentos) {
             <td>R$ ${lancamento.valor?.toFixed(2)?.replace(".", ",")}</td>
             <td>${lancamento.categoria}</td>
             <td>
-                <button class="btn-acao editar">Editar</button>
+                <button class="btn-acao editar" data-id="${lancamento}">Editar</button>
                 <button class="btn-acao excluir" data-id="${lancamento._id}">Excluir</button>
             </td>
         `;
+
+        linha.querySelector(".editar").addEventListener("click", () => {
+            editarLancamento(lancamento);
+        });
 
         linha.querySelector(".excluir").addEventListener("click", () => {
             deletarLancamento(lancamento._id);
@@ -120,5 +124,29 @@ async function deletarLancamento(id) {
         if(resultado.status === "sucesso") {
             await renderizarMes();
         }
+    }
+}
+
+async function editarLancamento(lancamento) {
+    if (lancamento.tipo === "despesa") {
+
+        renderizarModalDespesa(
+            lancamento._id,
+            lancamento.descricao,
+            lancamento.valor,
+            lancamento.categoria,
+            lancamento.data
+        );
+
+    } else if (lancamento.tipo === "receita") {
+
+        renderizarModalReceita(
+            lancamento._id,
+            lancamento.descricao,
+            lancamento.valor,
+            lancamento.categoria,
+            lancamento.data
+        );
+
     }
 }
