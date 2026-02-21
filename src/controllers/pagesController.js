@@ -12,3 +12,7 @@ export function exibirPaginaLogin(req, res) {
 export function exibirPaginaCadastro(req, res) {
     res.status(200).sendFile(path.join(__dirname, "../../public/html/cadastro.html"));
 }
+
+export function exibirPaginaIndex(req, res) {
+    res.status(200).sendFile(path.join(__dirname, "../../public/html/index.html"));
+}

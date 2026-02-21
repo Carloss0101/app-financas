@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem('email', usuario.email);
       
       //Redireciona para index após o login de sucesso
-      //window.location.href = 'http://localhost:8080/index';
+      window.location.href = 'http://localhost:3000/index';
     } else {
         console.error(`[${status}] Ocorreu um erro no login.`);
     }

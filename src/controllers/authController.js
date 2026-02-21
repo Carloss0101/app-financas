@@ -16,6 +16,13 @@ export async function login(req, res) {
     
     const token = gerarToken({ id: resultadoCredenciais.usuario._id });
 
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 30 
+    });
+
     const usuarioSeguro = {
         userid: resultadoCredenciais.usuario._id,
         username: resultadoCredenciais.usuario.username,

@@ -1,7 +1,8 @@
 import express, { Router } from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { exibirPaginaLogin, exibirPaginaCadastro } from "../controllers/pagesController.js";
+import { exibirPaginaLogin, exibirPaginaCadastro, exibirPaginaIndex } from "../controllers/pagesController.js";
+import { autenticacao } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
@@ -14,4 +15,8 @@ router.use("/public", express.static(path.join(__dirname, "../../public")));
 router.get("/login", exibirPaginaLogin);
 router.get("/cadastro", exibirPaginaCadastro);
 
+//Paginas protegidas
+
+router.get('/', autenticacao, exibirPaginaIndex);
+router.get('/index', autenticacao, exibirPaginaIndex);
 export default router;
