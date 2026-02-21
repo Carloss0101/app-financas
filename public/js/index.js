@@ -5,6 +5,8 @@ import {getDataAtual, avancarMes, voltarMes, formatarMesAno} from "./utils/month
 
 var lancamentos = [];
 
+document.getElementById('nome').textContent = `Olá, ${localStorage.getItem("name")}`;
+
 export async function carregarDados(ano, mes) {
     const url = `http://localhost:3000/lancamento/${ano}/${mes}`;
     const resultado = await solicitacaoAPI(url);   
@@ -87,7 +89,7 @@ function renderizarMes() {
     const data = getDataAtual();
     const ano = data.getFullYear();
     const mes = data.getMonth() + 1;
-    
+
     spanMes.textContent = formatarMesAno(data);
     carregarDados(ano, mes);
 }
