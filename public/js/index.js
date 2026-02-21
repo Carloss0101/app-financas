@@ -1,9 +1,12 @@
 import { renderizarModalDespesa } from "./modais/formDispesa.js";
+import { renderizarModalReceita } from "./modais/formReceita.js";
 import {solicitacaoAPI} from "./utils/AcessApi.js";
+import {getDataAtual, avancarMes, voltarMes, formatarMesAno} from "./utils/monthNavigator.js";
+
 var lancamentos = [];
 
-export async function carregarDados() {
-    const url = "http://localhost:3000/lancamento/2";
+export async function carregarDados(ano, mes) {
+    const url = `http://localhost:3000/lancamento/${ano}/${mes}`;
     const resultado = await solicitacaoAPI(url);   
 
     lancamentos = resultado?.lancamentos;
@@ -13,8 +16,6 @@ export async function carregarDados() {
     
     console.log("Resultado da API:", resultado);
 }
-
-await carregarDados();
 
 function calcularDadosDashboard(dados) {
     const receitas = dados.filter(lancamento => lancamento.tipo === "receita");
@@ -52,6 +53,7 @@ export function atualizarTabelaLancamentos(lancamentos) {
     const tabela = document.getElementById("tabela-lancamentos");
     tabela.innerHTML = `
         <tr>
+            <th>Tipo</th>
             <th>Data</th>
             <th>Descrição</th>
             <th>Valor</th>
@@ -62,6 +64,7 @@ export function atualizarTabelaLancamentos(lancamentos) {
     for (const lancamento of lancamentos) {
         const linha = document.createElement("tr");
         linha.innerHTML = `
+            <th>${lancamento.tipo}</th>
             <td>${new Date(lancamento.data).toLocaleDateString("pt-BR")}</td>
             <td>${lancamento.descricao}</td>
             <td>R$ ${lancamento.valor?.toFixed(2)?.replace(".", ",")}</td>
@@ -76,3 +79,27 @@ export function atualizarTabelaLancamentos(lancamentos) {
 }
 
 document.getElementById('adicionar-despesa').onclick = renderizarModalDespesa;
+document.getElementById('adicionar-receita').onclick = renderizarModalReceita;
+
+const spanMes = document.getElementById("mesAtual");
+
+function renderizarMes() {
+    const data = getDataAtual();
+    const ano = data.getFullYear();
+    const mes = data.getMonth() + 1;
+    
+    spanMes.textContent = formatarMesAno(data);
+    carregarDados(ano, mes);
+}
+
+document.getElementById("proximoMes").addEventListener("click", () => {
+    avancarMes();
+    renderizarMes();
+});
+
+document.getElementById("mesAnterior").addEventListener("click", () => {
+    voltarMes();
+    renderizarMes();
+});
+
+renderizarMes();

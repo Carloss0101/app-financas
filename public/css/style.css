@@ -138,7 +138,7 @@ body {
 
 
 .tabela-despesas {
-  width: 90%;
+  width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
   table-layout: fixed; 

@@ -18,7 +18,7 @@ export async function criarLancamento(req, res) {
 }
 
 export async function getLancamentos(req, res) {
-    const resultadoLancamentos = await buscarLancamentosPorUsuario(req.usuario.id, req.params?.mes);
+    const resultadoLancamentos = await buscarLancamentosPorUsuario(req.usuario.id, req.params?.ano, req.params?.mes);
 
     if (!resultadoLancamentos.sucesso) {
         return res.status(500).json({ mensagem: resultadoLancamentos.mensagem });

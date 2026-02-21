@@ -6,7 +6,7 @@ const router = Router();
 
 //Lançamentos (Receitas ou Despesas)
 router.post('/', autenticacao, criarLancamento);
-router.get('/:mes', autenticacao, getLancamentos );
+router.get('/:ano/:mes', autenticacao, getLancamentos );
 //router.put('/:id');
 router.delete('/:id', autenticacao, deleteLancamento);
 

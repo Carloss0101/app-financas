@@ -54,29 +54,34 @@ export async function salvarLancamento(dados, userId) {
 
 }
 
-export async function buscarLancamentosPorUsuario(userId, mes) {
+export async function buscarLancamentosPorUsuario(userId, ano, mes) {
     try {
-        const anoAtual = new Date().getFullYear();
-        const mesIndex = parseInt(mes); 
+        console.log("ANO recebido:", ano);
+        console.log("MES recebido:", mes);
+        const anoNumero = parseInt(ano);
+        const mesNumero = parseInt(mes);
 
-        const dataInicio = new Date(anoAtual, mesIndex - 1, 1);
-        const dataFim = new Date(anoAtual, mesIndex, 1);
-
-        const lancamentos = await Lancamento.find({ 
-            userId: userId, 
-            data: { 
+        const dataInicio = new Date(anoNumero, mesNumero - 1, 1);
+        const dataFim = new Date(anoNumero, mesNumero, 1);
+        
+        const lancamentos = await Lancamento.find({
+            userId: userId,
+            data: {
                 $gte: dataInicio,
                 $lt: dataFim
-            } 
-        }).sort({ data: 1 });
+            }
 
+        }).sort({ data: 1 });
         return {
             sucesso: true,
             lancamentos
         };
     } catch (error) {
         console.error("Erro ao buscar Lançamentos: ", error);
-        return { sucesso: false, mensagem: "Erro ao buscar lançamentos." };
+        return {
+            sucesso: false,
+            mensagem: "Erro ao buscar lançamentos."
+        };
     }
 }
 
