@@ -1,5 +1,5 @@
 import { solicitacaoAPI } from "../utils/AcessApi.js";
-import { carregarDados } from "../index.js";
+import { renderizarMes } from "../index.js";
 
 export function renderizarModalDespesa() {
 
@@ -62,7 +62,7 @@ export function renderizarModalDespesa() {
 
         const resultado = await solicitacaoAPI("http://localhost:3000/lancamento", "POST", payload);
 
-        if(resultado.status === "sucesso") { await carregarDados(); fechar(); }
+        if(resultado.status === "sucesso") { await renderizarMes(); fechar(); }
     };
 
     document.getElementById('btnFecharModal').onclick = fechar;

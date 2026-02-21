@@ -73,9 +73,14 @@ export function atualizarTabelaLancamentos(lancamentos) {
             <td>${lancamento.categoria}</td>
             <td>
                 <button class="btn-acao editar">Editar</button>
-                <button class="btn-acao excluir">Excluir</button>
+                <button class="btn-acao excluir" data-id="${lancamento._id}">Excluir</button>
             </td>
         `;
+
+        linha.querySelector(".excluir").addEventListener("click", () => {
+            deletarLancamento(lancamento._id);
+        });
+
         tabela.appendChild(linha);
     }
 }
@@ -85,13 +90,13 @@ document.getElementById('adicionar-receita').onclick = renderizarModalReceita;
 
 const spanMes = document.getElementById("mesAtual");
 
-function renderizarMes() {
+export async function renderizarMes() {
     const data = getDataAtual();
     const ano = data.getFullYear();
     const mes = data.getMonth() + 1;
 
     spanMes.textContent = formatarMesAno(data);
-    carregarDados(ano, mes);
+    await carregarDados(ano, mes);
 }
 
 document.getElementById("proximoMes").addEventListener("click", () => {
@@ -105,3 +110,15 @@ document.getElementById("mesAnterior").addEventListener("click", () => {
 });
 
 renderizarMes();
+
+async function deletarLancamento(id) {
+    console.log("ID do lançamento a ser deletado:", id);
+    const confirmacao = confirm("Tem certeza que deseja excluir este lançamento?");
+    if (confirmacao) {
+        const resultado = await solicitacaoAPI(`http://localhost:3000/lancamento/${id}`, "DELETE");
+
+        if(resultado.status === "sucesso") {
+            await renderizarMes();
+        }
+    }
+}

@@ -34,5 +34,5 @@ export async function deleteLancamento(req, res) {
         return res.status(500).json({ mensagem: resultadoLancamentos.mensagem });
     }
 
-    return res.status(200).json({ resultadoLancamentos });
+    return res.status(200).json({ status: "sucesso", mensagem: "Lançamento deletado com sucesso." });
 }
