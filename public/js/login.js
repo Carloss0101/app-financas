@@ -1,4 +1,4 @@
-import acessApi from "./modules/AcessApi.js";
+import {acessApi} from "./utils/AcessApi.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");

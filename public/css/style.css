@@ -51,12 +51,10 @@ body {
   opacity: 0.8;
 }
 
-/* CONTAINER */
 .container {
   padding: 30px;
 }
 
-/* CARDS */
 .cards {
   display: flex;
   gap: 20px;
@@ -102,7 +100,6 @@ body {
   color: var(--cor-botao-azul);
 }
 
-/* BOTÕES DE AÇÃO */
 .acoes {
   margin-bottom: 30px;
   display: flex;
@@ -127,7 +124,6 @@ body {
   opacity: 0.85;
 }
 
-/* LISTA */
 .lista-despesas {
   background-color: var(--cor-background-clara);
   padding: 20px;
@@ -140,17 +136,17 @@ body {
   color: #cbd5ff;
 }
 
-/* TABELA */
+
 .tabela-despesas {
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
   margin-top: 15px;
-  table-layout: fixed; /* 🔥 força largura igual */
+  table-layout: fixed; 
 }
 
 .tabela-despesas th,
 .tabela-despesas td {
-  width: 25%; /* 🔥 divide igualmente (4 colunas = 25%) */
+  width: 25%;
   text-align: center;
   padding: 14px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -170,13 +166,11 @@ body {
   background-color: rgba(255,255,255,0.05);
 }
 
-
 .valor {
   color: #ef4444;
   font-weight: bold;
 }
 
-/* BOTÕES TABELA */
 .btn-acao {
   padding: 6px 10px;
   border: none;
@@ -201,9 +195,6 @@ body {
   opacity: 0.85;
 }
 
-/* ---------------- RESPONSIVIDADE ---------------- */
-
-/* Tablet */
 @media (max-width: 1024px) {
   .cards {
     flex-direction: column;
@@ -238,4 +229,149 @@ body {
   .btn {
     width: 100%;
   }
+}
+
+
+.tabela-wrapper {
+    max-height: 350px; 
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 0 0 8px 8px; 
+}
+
+
+.tabela-despesas thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--cor-background-modal);
+}
+
+
+.tabela-wrapper::-webkit-scrollbar {
+    width: 6px; 
+}
+
+.tabela-wrapper::-webkit-scrollbar-track {
+    background: var(--cor-background-escura); 
+}
+
+.tabela-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--cor-background-clara); 
+    border-radius: 10px;
+    border: 1px solid var(--cor-background-escura); 
+}
+
+.tabela-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: var(--cor-botao-azul); 
+}
+
+.tabela-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: var(--cor-background-clara) var(--cor-background-escura);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  padding: 20px; 
+}
+
+.modal-content {
+  background-color: var(--cor-background-modal);
+  width: 100%;
+  max-width: 450px; 
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+}
+
+.modal-header h2 {
+  font-size: 22px;
+  color: #cbd5ff;
+}
+
+.close {
+  font-size: 30px;
+  cursor: pointer;
+  color: #ef4444;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.close:hover {
+  transform: scale(1.2);
+}
+
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #cbd5ff;
+  font-weight: bold;
+}
+
+.form-group input, 
+.form-group select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--cor-background-escura);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--cor-botao-azul);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-salvar {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--cor-botao-azul);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s, transform 0.1s;
+}
+
+.btn-salvar:hover {
+  background-color: #0056b3;
+}
+
+.btn-salvar:active {
+  transform: scale(0.98);
 }

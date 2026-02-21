@@ -1,6 +1,7 @@
 import { validarDadosLancamento, salvarLancamento, buscarLancamentosPorUsuario, deletarLancamentosPorId } from "../services/lancamentoServices.js";
 
 export async function criarLancamento(req, res) {
+    console.log("Dados recebidos para criação de lançamento:", req.body);
     const resultadoValidacao = validarDadosLancamento(req.body);
     
     if (!resultadoValidacao.valido) {
@@ -17,7 +18,7 @@ export async function criarLancamento(req, res) {
 }
 
 export async function getLancamentos(req, res) {
-    const resultadoLancamentos = await buscarLancamentosPorUsuario(req.usuario.id);
+    const resultadoLancamentos = await buscarLancamentosPorUsuario(req.usuario.id, req.params?.mes);
 
     if (!resultadoLancamentos.sucesso) {
         return res.status(500).json({ mensagem: resultadoLancamentos.mensagem });

@@ -1,53 +1,78 @@
-async function solicitacaoAPI(url, method = "GET", data = null) {
-    try {
-        const options = {
-            method: method,
-            headers: {
-                "Content-Type": "application/json",
-                "authorization": `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-            }
-        };
-        
-        if (data !== null) {
-            options.body = JSON.stringify(data);
-        }
+import { renderizarModalDespesa } from "./modais/formDispesa.js";
+import {solicitacaoAPI} from "./utils/AcessApi.js";
+var lancamentos = [];
 
-        const resposta = await fetch(url, options);
-
-        const resultado = await resposta.json();
-
-        if (resposta.ok) {
-
-            console.log("Resposta da api recebida: ", resultado);
-            return resultado;
-
-        } else {
-
-            console.error("Erro da API:", resultado);
-            return resultado;
-
-        }
-
-    } catch (error) {
-
-        console.error("Algo deu errado na requisição: ", error);
-
-        return {
-            ok: false,
-            mensagem: error.message
-        };
-    }
-}
-
-async function carregarDados() {
-    const url = "http://localhost:3000/lancamento";
+export async function carregarDados() {
+    const url = "http://localhost:3000/lancamento/2";
     const resultado = await solicitacaoAPI(url);   
+
+    lancamentos = resultado?.lancamentos;
+    
+    atualizarDashboard(lancamentos);
+    atualizarTabelaLancamentos(lancamentos);
+    
     console.log("Resultado da API:", resultado);
-    if (resultado.ok) {
-        console.log(JSON.stringify(resultado.dados, null, 2));
-    } else {
-        console.error("Erro ao carregar dados protegidos:", resultado.mensagem);
-    }
 }
 
 await carregarDados();
+
+function calcularDadosDashboard(dados) {
+    const receitas = dados.filter(lancamento => lancamento.tipo === "receita");
+    const despesas = dados.filter(lancamento => lancamento.tipo === "despesa");
+
+    const totalReceitas = receitas.reduce((total, lancamento) => {
+        return total + lancamento.valor;
+    }, 0);
+
+    const totalDespesas = despesas.reduce((total, lancamento) => {
+        return total + lancamento.valor;
+    }, 0);
+
+    return {
+        totalReceitas: totalReceitas?.toFixed(2).replace(".", ","),
+        totalDespesas: totalDespesas?.toFixed(2).replace(".", ","),
+        saldo: (totalReceitas - totalDespesas)?.toFixed(2).replace(".", ",")
+    };
+}
+
+function atualizarDashboard(lancamentos) {
+    const dadosDashboard = calcularDadosDashboard(lancamentos);
+
+    document.getElementById("receita").textContent = `R$ ${dadosDashboard.totalReceitas}`;
+    document.getElementById("despesa").textContent = `R$ ${dadosDashboard.totalDespesas}`;
+    const saldo = document.getElementById("saldo");
+    saldo.textContent = `R$ ${dadosDashboard.saldo}`;  
+    saldo.style.color = parseFloat(dadosDashboard.saldo) >= 0 ? "#22c55e" : "#ef4444";
+    
+
+    console.log("Dashboard atualizado com sucesso!");
+}
+
+export function atualizarTabelaLancamentos(lancamentos) {
+    const tabela = document.getElementById("tabela-lancamentos");
+    tabela.innerHTML = `
+        <tr>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    `;
+    for (const lancamento of lancamentos) {
+        const linha = document.createElement("tr");
+        linha.innerHTML = `
+            <td>${new Date(lancamento.data).toLocaleDateString("pt-BR")}</td>
+            <td>${lancamento.descricao}</td>
+            <td>R$ ${lancamento.valor?.toFixed(2)?.replace(".", ",")}</td>
+            <td>${lancamento.categoria}</td>
+            <td>
+                <button class="btn-acao editar">Editar</button>
+                <button class="btn-acao excluir">Excluir</button>
+            </td>
+        `;
+        tabela.appendChild(linha);
+    }
+}
+
+document.getElementById('adicionar-despesa').onclick = renderizarModalDespesa;

@@ -23,30 +23,30 @@
         <section class="cards">
             <div class="card receita">
                 <h2>Total de Receita</h2>
-                <p>R$ 5.000,00</p>
+                <p id="receita">R$ 0,00</p>
             </div>
 
             <div class="card despesa">
                 <h2>Total de Despesas</h2>
-                <p>R$ 2.300,00</p>
+                <p id="despesa">R$ 0,00</p>
             </div>
 
             <div class="card saldo">
                 <h2>Saldo</h2>
-                <p>R$ 2.700,00</p>
+                <p id="saldo">R$ 0,00</p>
             </div>
         </section>
 
         <section class="acoes">
-            <button class="btn adicionar-receita">+ Adicionar Receita</button>
-            <button class="btn adicionar-despesa">+ Adicionar Despesa</button>
+            <button class="btn adicionar-receita" id="adicionar-receita">+ Adicionar Receita</button>
+            <button class="btn adicionar-despesa" id="adicionar-despesa">+ Adicionar Despesa</button>
         </section>
 
         <section class="lista-despesas">
             <h2>Despesas do Mês</h2>
 
             <div class="tabela-wrapper">
-                <table class="tabela-despesas">
+                <table class="tabela-despesas" id="tabela-lancamentos">
                     <thead>
                         <tr>
                             <th>Data</th>

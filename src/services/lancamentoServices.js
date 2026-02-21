@@ -54,9 +54,22 @@ export async function salvarLancamento(dados, userId) {
 
 }
 
-export async function buscarLancamentosPorUsuario(userId) {
+export async function buscarLancamentosPorUsuario(userId, mes) {
     try {
-        const lancamentos = await Lancamento.find({ userId: userId });
+        const anoAtual = new Date().getFullYear();
+        const mesIndex = parseInt(mes); 
+
+        const dataInicio = new Date(anoAtual, mesIndex - 1, 1);
+        const dataFim = new Date(anoAtual, mesIndex, 1);
+
+        const lancamentos = await Lancamento.find({ 
+            userId: userId, 
+            data: { 
+                $gte: dataInicio,
+                $lt: dataFim
+            } 
+        }).sort({ data: 1 });
+
         return {
             sucesso: true,
             lancamentos
