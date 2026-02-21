@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const data = Object.fromEntries(formData.entries()); 
 
     const {status, accessToken, usuario} = await acessApi(
-      "http://localhost:3000/auth/login",
+      "auth/login",
       data
     );
     

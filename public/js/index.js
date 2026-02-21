@@ -8,7 +8,7 @@ var lancamentos = [];
 document.getElementById('nome').textContent = `Olá, ${localStorage.getItem("name")}`;
 
 export async function carregarDados(ano, mes) {
-    const url = `http://localhost:3000/lancamento/${ano}/${mes}`;
+    const url = `lancamento/${ano}/${mes}`;
     const resultado = await solicitacaoAPI(url);   
 
     lancamentos = resultado?.lancamentos;
@@ -119,7 +119,7 @@ async function deletarLancamento(id) {
     console.log("ID do lançamento a ser deletado:", id);
     const confirmacao = confirm("Tem certeza que deseja excluir este lançamento?");
     if (confirmacao) {
-        const resultado = await solicitacaoAPI(`http://localhost:3000/lancamento/${id}`, "DELETE");
+        const resultado = await solicitacaoAPI(`lancamento/${id}`, "DELETE");
 
         if(resultado.status === "sucesso") {
             await renderizarMes();

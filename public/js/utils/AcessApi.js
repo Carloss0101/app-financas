@@ -1,6 +1,9 @@
+//const baseAPI = "http://localhost:3000/"; 
+const baseAPI = "https://financas.carlos0101.xyz/"; 
+
 export async function acessApi(url, data, method = "POST") {
   try {
-    const resposta = await fetch(url, {
+    const resposta = await fetch(`${baseAPI}${url}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +41,7 @@ export async function solicitacaoAPI(url, method = "GET", data = null) {
             options.body = JSON.stringify(data);
         }
 
-        const resposta = await fetch(url, options);
+        const resposta = await fetch(`${baseAPI}${url}`, options);
         const resultado = await resposta.json();
         
         if (resultado?.status == 'sucesso') {

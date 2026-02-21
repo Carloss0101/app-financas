@@ -68,9 +68,9 @@ export function renderizarModalDespesa(id = null, descricao = null, valor = null
 
         let resultado;
         if(isEdit) {
-            resultado = await solicitacaoAPI("http://localhost:3000/lancamento", "PUT", payload);
+            resultado = await solicitacaoAPI("lancamento", "PUT", payload);
         } else {
-            resultado = await solicitacaoAPI("http://localhost:3000/lancamento", "POST", payload);
+            resultado = await solicitacaoAPI("lancamento", "POST", payload);
         }
 
         if(resultado.status === "sucesso") { await renderizarMes(); fechar(); }
