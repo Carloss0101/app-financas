@@ -15,7 +15,7 @@ export function autenticacao(req, res, next) {
     console.log("Token extraído:", token ? "Token encontrado" : "Nenhum token");
 
     if (!token) {
-        return res.redirect("/login").status(401).json({ mensagem: "Token de autenticação não fornecido." });
+        return res.redirect("/login");
     }
 
     try {
@@ -23,6 +23,6 @@ export function autenticacao(req, res, next) {
         req.usuario = decoded;
         next();
     } catch (error) {
-        return res.redirect("/login").status(401).json({ mensagem: "Token inválido ou expirado." });
+        return res.redirect("/login");
     }
 }
