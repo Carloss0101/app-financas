@@ -66,8 +66,8 @@ export function atualizarTabelaLancamentos(lancamentos) {
     for (const lancamento of lancamentos) {
         const linha = document.createElement("tr");
         linha.innerHTML = `
-            <th>${lancamento.tipo}</th>
-            <td>${new Date(lancamento.data).toLocaleDateString("pt-BR")}</td>
+            <th><span class="tipo-${lancamento.tipo}">${lancamento.tipo}</span></th>
+            <td>${new Date(lancamento.data).toLocaleDateString("pt-BR", { timeZone: "UTC" })}</td>
             <td>${lancamento.descricao}</td>
             <td>R$ ${lancamento.valor?.toFixed(2)?.replace(".", ",")}</td>
             <td>${lancamento.categoria}</td>

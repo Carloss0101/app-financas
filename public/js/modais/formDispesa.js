@@ -83,6 +83,9 @@ export function renderizarModalDespesa(id = null, descricao = null, valor = null
     };
 
     modal.style.display = 'flex';
-    document.getElementById('dt').valueAsDate = new Date();
+    const campoData = document.getElementById('dt');
+    if (!campoData.value) {
+        campoData.valueAsDate = new Date();
+    }
 }
 

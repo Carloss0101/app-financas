@@ -375,3 +375,17 @@ body {
 .btn-salvar:active {
   transform: scale(0.98);
 }
+
+.tipo-despesa {
+  background-color: #ef4444;
+  padding: 5px 10px;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.tipo-receita {
+  background-color: #22c55e;
+  padding: 5px 10px;
+  border-radius: 25px;
+  font-weight: bold;
+}
