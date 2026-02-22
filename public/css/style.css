@@ -11,6 +11,7 @@
     padding: 0px;
     color: white;
     font-family: var(--fonte-padrao);
+    box-sizing: border-box;
 }
 
 body {
@@ -195,43 +196,6 @@ body {
   opacity: 0.85;
 }
 
-@media (max-width: 1024px) {
-  .cards {
-    flex-direction: column;
-  }
-}
-
-/* Celular */
-@media (max-width: 600px) {
-
-  .container {
-    padding: 20px;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .mes-controle {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .card p {
-    font-size: 20px;
-  }
-
-  .acoes {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 100%;
-  }
-}
-
-
 .tabela-wrapper {
     max-height: 350px; 
     overflow-y: auto;
@@ -388,4 +352,56 @@ body {
   padding: 5px 10px;
   border-radius: 25px;
   font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mes-controle {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .card p {
+    font-size: 20px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .tabela-wrapper {
+    max-height: 350px; 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    border-radius: 0 0 8px 8px; 
+  }
+
+  .tabela-despesas {
+    min-width: 700px; 
+    table-layout: auto; 
+  }
+
+  .tabela-despesas th,
+  .tabela-despesas td {
+    white-space: nowrap; 
+    word-wrap: normal; 
+    padding: 12px 15px; 
+  }
 }
