@@ -72,8 +72,8 @@ export function atualizarTabelaLancamentos(lancamentos) {
             <td>R$ ${lancamento.valor?.toFixed(2)?.replace(".", ",")}</td>
             <td>${lancamento.categoria}</td>
             <td>
-                <button class="btn-acao editar" data-id="${lancamento}">Editar</button>
-                <button class="btn-acao excluir" data-id="${lancamento._id}">Excluir</button>
+                <button class="btn-acao editar" data-id="${lancamento}"><img class="icon" src="public/img/icon-edit.png" alt=""></button>
+                <button class="btn-acao excluir" data-id="${lancamento._id}"><img class="icon" src="public/img/icon-lixo.png" alt=""></button>
             </td>
         `;
 

@@ -35,6 +35,12 @@ export function renderizarModalReceita(id = null, descricao = null, valor = null
                         <option value="Salário" ${categoria === "Salário" ? "selected" : ""}>Salário</option>
                         <option value="Freelancer" ${categoria === "Freelancer" ? "selected" : ""}>Freelancer</option>
                         <option value="Investimentos" ${categoria === "Investimentos" ? "selected" : ""}>Investimentos</option>
+                        <option value="Bônus" ${categoria === "Bônus" ? "selected" : ""}>Bônus</option>
+                        <option value="Presentes" ${categoria === "Presentes" ? "selected" : ""}>Presentes</option>
+                        <option value="Aluguéis" ${categoria === "Aluguéis" ? "selected" : ""}>Aluguéis</option>
+                        <option value="Rendimentos" ${categoria === "Rendimentos" ? "selected" : ""}>Rendimentos</option>
+                        <option value="Prêmios" ${categoria === "Prêmios" ? "selected" : ""}>Prêmios</option>
+                        <option value="Reembolsos" ${categoria === "Reembolsos" ? "selected" : ""}>Reembolsos</option>
                         <option value="Outros" ${categoria === "Outros" ? "selected" : ""}>Outros</option>
                     </select>
                 </div>

@@ -354,6 +354,11 @@ body {
   font-weight: bold;
 }
 
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
 @media (max-width: 600px) {
   body {
     overflow-y: auto;

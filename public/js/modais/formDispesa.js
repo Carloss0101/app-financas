@@ -33,9 +33,15 @@ export function renderizarModalDespesa(id = null, descricao = null, valor = null
                     <label>Categoria</label>
                     <select id="cat">
                         <option value="Alimentação" ${categoria === "Alimentação" ? "selected" : ""}>Alimentação</option>
-                        <option value="Transporte" ${categoria === "Transporte" ? "selected" : ""}>Transporte</option>
+                        <option value="Compras" ${categoria === "Compras" ? "selected" : ""}>Compras</option>
                         <option value="Lazer" ${categoria === "Lazer" ? "selected" : ""}>Lazer</option>
                         <option value="Saúde" ${categoria === "Saúde" ? "selected" : ""}>Saúde</option>
+                        <option value="Moradia" ${categoria === "Moradia" ? "selected" : ""}>Moradia</option>
+                        <option value="Educação" ${categoria === "Educação" ? "selected" : ""}>Educação</option>
+                        <option value="Roupas e Calçados" ${categoria === "Roupas e Calçados" ? "selected" : ""}>Roupas e Calçados</option>
+                        <option value="Internet e Telefonia" ${categoria === "Internet e Telefonia" ? "selected" : ""}>Internet e Telefonia</option>
+                        <option value="Assinaturas e Serviços" ${categoria === "Assinaturas e Serviços" ? "selected" : ""}>Assinaturas e Serviços</option>
+                        <option value="Impostos e Taxas" ${categoria === "Impostos e Taxas" ? "selected" : ""}>Impostos e Taxas</option>
                     </select>
                 </div>
                 <div class="form-group">
